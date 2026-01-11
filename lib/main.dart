@@ -1,12 +1,13 @@
+import 'package:fast_shablon_deck/deisng/colors.dart';
 import 'package:fast_shablon_deck/screens/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const fastShablonDesck());
+  runApp(const FastShablonDesck());
 }
 
-class fastShablonDesck extends StatelessWidget {
-  const fastShablonDesck({super.key});
+class FastShablonDesck extends StatelessWidget {
+  const FastShablonDesck({super.key});
 
   // This widget is the root of your application.
   @override
@@ -14,10 +15,10 @@ class fastShablonDesck extends StatelessWidget {
     return MaterialApp(
       title: 'Шаблоны для работы',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: colorYellow),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Шаблоны для работы'),
+      home: const FastShablonHomePage(title: 'Шаблоны для работы'),
     );
   }
 }
