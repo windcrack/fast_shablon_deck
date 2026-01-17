@@ -173,93 +173,95 @@ class _FastShablonHomePageState extends State<FastShablonHomePage> {
                     ],
                   ),
                 )
-              : ListView.builder(
+              : GridView.builder(
                   padding: const EdgeInsets.all(8.0),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, // Количество колонок
+                    crossAxisSpacing: 8.0, // Расстояние между колонками
+                    mainAxisSpacing: 8.0, // Расстояние между строками
+                    childAspectRatio: 3, // Соотношение ширины к высоте (настройте под себя)
+                  ),
                   itemCount: _filtesShablons.length,
                   itemBuilder: (context, index) {
                     final shablon = _filtesShablons[index];
-                    return Column(
-                      children: [
-                        Card(
-                          margin: const EdgeInsets.only(bottom: 8.0),
-                          elevation: 2,
-                          child: InkWell(
-                            onTap: () => _copyToClipboard(shablon.textUser),
-                            borderRadius: BorderRadius.circular(12),
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Row(
-                                children: [
-                                  // Индекс
-                                  Container(
-                                    width: 36,
-                                    height: 36,
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context).primaryColor,
-                                      shape: BoxShape.circle,
+                    return Card(
+                      // margin: const EdgeInsets.only(bottom: 8.0),
+                      elevation: 2,
+                      child: InkWell(
+                        onTap: () => _copyToClipboard(shablon.textUser),
+                        borderRadius: BorderRadius.circular(12),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Row(
+                            children: [
+                              // Индекс
+                              Container(
+                                width: 36,
+                                height: 36,
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).primaryColor,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '${index + 1}',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    child: Center(
-                                      child: Text(
-                                        '${index + 1}',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 16),
+                              
+                              // Текст шаблона
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      shablon.textUser.length > 100
+                                          ? '${shablon.textUser.substring(0, 100)}...'
+                                          : shablon.textUser,
+                                      style: const TextStyle(fontSize: 16),
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      'Нажмите, чтобы скопировать',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.grey[600],
+                                        fontStyle: FontStyle.italic,
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(width: 16),
-                                  
-                                  // Текст шаблона
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          shablon.textUser.length > 100
-                                              ? '${shablon.textUser.substring(0, 100)}...'
-                                              : shablon.textUser,
-                                          style: const TextStyle(fontSize: 16),
-                                          maxLines: 3,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        const SizedBox(height: 4),
-                                        Text(
-                                          'Нажмите, чтобы скопировать',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.grey[600],
-                                            fontStyle: FontStyle.italic,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  
-                                  // Иконка копирования
-                                  IconButton(
-                                    icon: const Icon(
-                                      Icons.content_copy,
-                                      color: Colors.blue,
-                                    ),
-                                    onPressed: () => _copyToClipboard(shablon.textUser),
-                                    tooltip: 'Копировать',
-                                  ),
-                                  // Иконка редактирования
-                                  IconButton(
-                                    icon: const Icon(
-                                      Icons.edit_document,
-                                      color: colorBlue,
-                                    ),
-                                    onPressed: () => _showEditModal(shablon),
-                                    tooltip: 'Редактировать',
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
+                              
+                              // Иконка копирования
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.content_copy,
+                                  color: Colors.blue,
+                                ),
+                                onPressed: () => _copyToClipboard(shablon.textUser),
+                                tooltip: 'Копировать',
+                              ),
+                              // Иконка редактирования
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.edit_document,
+                                  color: colorBlue,
+                                ),
+                                onPressed: () => _showEditModal(shablon),
+                                tooltip: 'Редактировать',
+                              ),
+                            ],
                           ),
                         ),
-                      ],
+                      ),
                     );
                   },
                 ),

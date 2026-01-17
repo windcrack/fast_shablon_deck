@@ -1,8 +1,10 @@
+
 import 'package:fast_shablon_deck/deisng/colors.dart';
 import 'package:fast_shablon_deck/screens/home.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+
   runApp(const FastShablonDesck());
 }
 
